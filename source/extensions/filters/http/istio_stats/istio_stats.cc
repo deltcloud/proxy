@@ -774,6 +774,7 @@ public:
 
   // Http::StreamDecoderFilter
   Http::FilterHeadersStatus decodeHeaders(Http::RequestHeaderMap& request_headers, bool) override {
+    ENVOY_LOG(info, "on http decode xx.");
     is_grpc_ = Grpc::Common::isGrpcRequestHeaders(request_headers);
     if (is_grpc_) {
       report_timer_ = decoder_callbacks_->dispatcher().createTimer([this] { onReportTimer(); });
